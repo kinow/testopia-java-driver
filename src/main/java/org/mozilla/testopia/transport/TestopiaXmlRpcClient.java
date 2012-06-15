@@ -37,6 +37,8 @@ import org.apache.xmlrpc.client.XmlRpcSunHttpTransport;
 import org.apache.xmlrpc.client.XmlRpcTransport;
 
 /**
+ * XML-RPC client for Testopia. This client stores cookies, as Testopia expects 
+ * that you first log in in order to be able to call other methods.
  * @author Bruno P. Kinoshita - http://www.kinoshita.eti.br
  * @since 0.1
  */

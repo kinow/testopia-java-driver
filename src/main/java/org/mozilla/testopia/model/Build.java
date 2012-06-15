@@ -28,7 +28,6 @@ import java.io.Serializable;
 
 /**
  * Build.
- * 
  * @author Bruno P. Kinoshita - http://www.kinoshita.eti.br
  * @since 0.1
  */

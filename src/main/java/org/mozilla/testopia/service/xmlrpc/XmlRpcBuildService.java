@@ -35,6 +35,7 @@ import org.mozilla.testopia.service.BuildService;
 /**
  * XML-RPC implementation of BuildService.
  * @author Bruno P. Kinoshita - http://www.kinoshita.eti.br
+ * @see BuildService
  * @since 0.1
  */
 public class XmlRpcBuildService implements BuildService {
