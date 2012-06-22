@@ -29,7 +29,7 @@ import org.mozilla.testopia.model.Build;
 
 
 /**
- * Service for builds.
+ * Service for Builds.
  * @author Bruno P. Kinoshita - http://www.kinoshita.eti.br
  * @since 0.1
  */

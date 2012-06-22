@@ -24,14 +24,15 @@
 package org.mozilla.testopia;
 
 import java.net.URL;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.xmlrpc.XmlRpcException;
 import org.mozilla.testopia.model.Build;
 import org.mozilla.testopia.service.BuildService;
+import org.mozilla.testopia.service.MiscService;
+import org.mozilla.testopia.service.TestCaseService;
 import org.mozilla.testopia.service.xmlrpc.XmlRpcBuildService;
+import org.mozilla.testopia.service.xmlrpc.XmlRpcMiscService;
+import org.mozilla.testopia.service.xmlrpc.XmlRpcTestCaseService;
 import org.mozilla.testopia.transport.TestopiaXmlRpcClient;
 
 
@@ -40,40 +41,59 @@ import org.mozilla.testopia.transport.TestopiaXmlRpcClient;
  * @author Bruno P. Kinoshita - http://www.kinoshita.eti.br
  * @since 0.1
  */
-public class TestopiaAPI implements BuildService {
+public class TestopiaAPI implements MiscService, BuildService, TestCaseService {
 
     private boolean loggedIn = Boolean.FALSE;
     private final URL url;
     private final TestopiaXmlRpcClient client;
+    /*
+     * -------------------------------------------------------------------------
+     * Le services
+     * -------------------------------------------------------------------------
+     */
+    private MiscService miscService;
     private BuildService buildService;
+    private TestCaseService testCaseService;
     
     public TestopiaAPI(URL url) {
         this.url = url;
         client = new TestopiaXmlRpcClient(url);
+        miscService = new XmlRpcMiscService(client);
         buildService = new XmlRpcBuildService(client);
+        testCaseService = new XmlRpcTestCaseService(client);
+    }
+    
+    /**
+     * @return the url
+     */
+    public URL getUrl() {
+        return url;
     }
     
     public boolean isLoggedIn() {
         return this.loggedIn;
     }
-    
+    /*
+     * -------------------------------------------------------------------------
+     * Miscellaneous methods
+     * -------------------------------------------------------------------------
+     */
+    /**
+     * {@inheritDoc}
+     */
     public void login(String username, String password) {
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("login", username);
-        map.put("password", password);
-        try {
-            client.execute("User.login", new Object[]{map});
-        } catch (XmlRpcException e) {
-            throw new RuntimeException("Failed to login!", e);
-        }
+        miscService.login(username, password);
         this.loggedIn = Boolean.TRUE;
     }
-    
+    /*
+     * -------------------------------------------------------------------------
+     * Build methods
+     * -------------------------------------------------------------------------
+     */
     /**
      * {@inheritDoc}
      */
     public Build checkBuild(String name, String product) {
-        // TODO Auto-generated method stub
         return buildService.checkBuild(name, product);
     }
 
@@ -82,7 +102,6 @@ public class TestopiaAPI implements BuildService {
      */
     public Build create(String product, String name, String milestone,
                         String description, Boolean isActive) {
-        // TODO Auto-generated method stub
         return buildService.create(product, name, milestone, description, isActive);
     }
 
@@ -113,5 +132,17 @@ public class TestopiaAPI implements BuildService {
     public Build update(Integer id, String name, String milestone,
                         String description, Boolean isActive) {
         return buildService.update(id, name, milestone, description, isActive);
+    }
+    
+    /*
+     * -------------------------------------------------------------------------
+     * Test Case methods
+     * -------------------------------------------------------------------------
+     */
+    /* (non-Javadoc)
+     * @see org.mozilla.testopia.service.TestCaseService#lookupStatusNameById(java.lang.Integer)
+     */
+    public String lookupStatusNameById(Integer statusId) {
+        return this.testCaseService.lookupStatusNameById(statusId);
     }
 }
