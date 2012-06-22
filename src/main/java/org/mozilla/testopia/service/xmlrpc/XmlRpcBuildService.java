@@ -45,7 +45,7 @@ public class XmlRpcBuildService implements BuildService {
     // Methods
     // ------------------------------------------------------------------------
     /**
-     * Create a XmlRpcBuildService
+     * Create a XmlRpcBuildService.
      * @param xmlRpcClient XML-RPC client
      */
     public XmlRpcBuildService(XmlRpcClient xmlRpcClient) {
