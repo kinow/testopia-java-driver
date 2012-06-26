@@ -38,7 +38,7 @@ public interface TestRunService {
      * @param id An integer representing the ID of the run in the database
      * @return TestRun
      */
-    TestRun get(Integer id);
+    TestRun getTestRun(Integer id);
     /**
      * Get the list of cases that this run is linked to.
      * @param id An integer representing the ID in the database

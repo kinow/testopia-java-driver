@@ -53,7 +53,7 @@ public class XmlRpcTestRunService implements TestRunService {
      * @see org.mozilla.testopia.service.TestRunService#get(java.lang.Integer)
      */
     @SuppressWarnings("unchecked")
-    public TestRun get(Integer id) {
+    public TestRun getTestRun(Integer id) {
         TestRun testRun = null;
         final Integer[] param = new Integer[]{id};
         try {

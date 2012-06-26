@@ -82,7 +82,7 @@ public class XmlRpcBuildService implements BuildService {
     /**
      * {@inheritDoc}
      */
-    public Build get(Integer id) {
+    public Build getBuild(Integer id) {
         Build build = null;
         Map<String, String> map = new HashMap<String, String>();
         map.put("id", Integer.toString(id));

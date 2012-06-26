@@ -40,5 +40,97 @@ public class TestCaseRun implements Serializable {
     private Integer environmentId;
     private Integer runId;
     private Integer testCaseId;
-
+    /**
+     * Default constructor.
+     */
+    public TestCaseRun() {
+        super();
+    }
+    /**
+     * Construct a TestCaseRun.
+     * @param id
+     * @param buildId
+     * @param environmentId
+     * @param runId
+     * @param testCaseId
+     */
+    public TestCaseRun(Integer id, Integer buildId, Integer environmentId,
+                       Integer runId, Integer testCaseId) {
+        super();
+        this.id = id;
+        this.buildId = buildId;
+        this.environmentId = environmentId;
+        this.runId = runId;
+        this.testCaseId = testCaseId;
+    }
+    
+    /**
+     * @return the id
+     */
+    public Integer getId() {
+        return id;
+    }
+    
+    /**
+     * @param id the id to set
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    
+    /**
+     * @return the buildId
+     */
+    public Integer getBuildId() {
+        return buildId;
+    }
+    
+    /**
+     * @param buildId the buildId to set
+     */
+    public void setBuildId(Integer buildId) {
+        this.buildId = buildId;
+    }
+    
+    /**
+     * @return the environmentId
+     */
+    public Integer getEnvironmentId() {
+        return environmentId;
+    }
+    
+    /**
+     * @param environmentId the environmentId to set
+     */
+    public void setEnvironmentId(Integer environmentId) {
+        this.environmentId = environmentId;
+    }
+    
+    /**
+     * @return the runId
+     */
+    public Integer getRunId() {
+        return runId;
+    }
+    
+    /**
+     * @param runId the runId to set
+     */
+    public void setRunId(Integer runId) {
+        this.runId = runId;
+    }
+    
+    /**
+     * @return the testCaseId
+     */
+    public Integer getTestCaseId() {
+        return testCaseId;
+    }
+    
+    /**
+     * @param testCaseId the testCaseId to set
+     */
+    public void setTestCaseId(Integer testCaseId) {
+        this.testCaseId = testCaseId;
+    }
 }

@@ -37,5 +37,5 @@ public interface TestPlanService {
      * @param id An integer representing the ID of this plan in the database
      * @return TestPlan
      */
-    TestPlan get(Integer id);
+    TestPlan getTestPlan(Integer id);
 }

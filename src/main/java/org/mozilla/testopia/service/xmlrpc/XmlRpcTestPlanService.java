@@ -54,7 +54,7 @@ public class XmlRpcTestPlanService implements TestPlanService {
      * @see org.mozilla.testopia.service.TestPlanService#get(java.lang.Integer)
      */
     @SuppressWarnings("unchecked")
-    public TestPlan get(Integer id) {
+    public TestPlan getTestPlan(Integer id) {
         TestPlan plan = null;
         Map<String, Integer> map = new HashMap<String, Integer>();
         map.put("id", id);

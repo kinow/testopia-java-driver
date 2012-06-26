@@ -56,7 +56,7 @@ public interface BuildService {
      * @param id an integer representing the ID in the database
      * @return Build
      */
-    Build get(Integer id);
+    Build getBuild(Integer id);
     /**
      * Returns the list of case-runs that this Build is used in.
      * @param id ID of the build
