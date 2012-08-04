@@ -93,7 +93,7 @@ public class XmlRpcTestRunService implements TestRunService {
                     if(o instanceof Map<?, ?>) {
                         final Map<String, Object> map = (Map<String, Object>)o;
                         final TestCase testCase = new TestCase();
-                        testCase.setId(Integer.parseInt(""+map.get("case_status_id")));
+                        testCase.setId(Integer.parseInt(""+map.get("case_id")));
                         testCase.setSummary(""+map.get("summary"));
                         testCase.setRequirement(""+map.get("requirement"));
                         testCase.setPriorityId(Integer.parseInt(""+map.get("priority_id")));
