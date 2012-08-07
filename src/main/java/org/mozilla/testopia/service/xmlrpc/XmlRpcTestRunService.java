@@ -119,5 +119,4 @@ public class XmlRpcTestRunService implements TestRunService {
         }
         return testCases;
     }
-
 }

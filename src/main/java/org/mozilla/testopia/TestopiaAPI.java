@@ -28,15 +28,18 @@ import java.util.List;
 
 import org.mozilla.testopia.model.Build;
 import org.mozilla.testopia.model.TestCase;
+import org.mozilla.testopia.model.TestCaseRun;
 import org.mozilla.testopia.model.TestPlan;
 import org.mozilla.testopia.model.TestRun;
 import org.mozilla.testopia.service.BuildService;
 import org.mozilla.testopia.service.MiscService;
+import org.mozilla.testopia.service.TestCaseRunService;
 import org.mozilla.testopia.service.TestCaseService;
 import org.mozilla.testopia.service.TestPlanService;
 import org.mozilla.testopia.service.TestRunService;
 import org.mozilla.testopia.service.xmlrpc.XmlRpcBuildService;
 import org.mozilla.testopia.service.xmlrpc.XmlRpcMiscService;
+import org.mozilla.testopia.service.xmlrpc.XmlRpcTestCaseRunService;
 import org.mozilla.testopia.service.xmlrpc.XmlRpcTestCaseService;
 import org.mozilla.testopia.service.xmlrpc.XmlRpcTestPlanService;
 import org.mozilla.testopia.service.xmlrpc.XmlRpcTestRunService;
@@ -52,6 +55,7 @@ public class TestopiaAPI implements MiscService,
                                     BuildService, 
                                     TestCaseService, 
                                     TestPlanService, 
+                                    TestCaseRunService, 
                                     TestRunService {
 
     private boolean loggedIn = Boolean.FALSE;
@@ -66,6 +70,7 @@ public class TestopiaAPI implements MiscService,
     private BuildService buildService;
     private TestCaseService testCaseService;
     private TestPlanService testPlanService;
+    private TestCaseRunService testCaseRunService;
     private TestRunService testRunService;
     
     public TestopiaAPI(URL url) {
@@ -75,6 +80,7 @@ public class TestopiaAPI implements MiscService,
         buildService = new XmlRpcBuildService(client);
         testCaseService = new XmlRpcTestCaseService(client);
         testPlanService = new XmlRpcTestPlanService(client);
+        testCaseRunService = new XmlRpcTestCaseRunService(client);
         testRunService = new XmlRpcTestRunService(client);
     }
     
@@ -190,5 +196,12 @@ public class TestopiaAPI implements MiscService,
      */
     public TestCase[] getTestCases(Integer id) {
         return this.testRunService.getTestCases(id);
+    }
+
+    /* (non-Javadoc)
+     * @see org.mozilla.testopia.service.TestCaseRunService#update(org.mozilla.testopia.model.TestCase, java.lang.Integer, java.lang.Integer, java.lang.Integer)
+     */
+    public TestCaseRun update(TestCase testCase, Integer runId, Integer buildId, Integer envId) {
+        return this.testCaseRunService.update(testCase, runId, buildId, envId);
     }
 }

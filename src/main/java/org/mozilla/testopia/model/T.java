@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.mozilla.testopia.service.xmlrpc.XmlRpcMiscService;
+import org.mozilla.testopia.service.xmlrpc.XmlRpcTestCaseRunService;
 import org.mozilla.testopia.service.xmlrpc.XmlRpcTestRunService;
 import org.mozilla.testopia.transport.TestopiaXmlRpcClient;
 
@@ -39,6 +40,26 @@ import org.mozilla.testopia.transport.TestopiaXmlRpcClient;
  */
 public class T {
 
+    public static void main4(String[] args) throws Exception {
+        URL url = new URL("http://localhost/bugzilla-4.2.1/xmlrpc.cgi");
+        TestopiaXmlRpcClient client = new TestopiaXmlRpcClient(url);
+        XmlRpcMiscService misc = new XmlRpcMiscService(client);
+        misc.login("testuser@example.com", "testuser");
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("id", 1);
+        
+        Object o = null;
+        try {
+            o = client.execute("TestCaseRun.update", new Object[]{map});
+            /*
+             *  (java.util.HashMap<K,V>) {milestone=---, isactive=1, product_id=3, description=Sample build, name=My build, build_id=1}
+             */
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+        System.out.println("Value: " + o);
+    }
+    
     public static void main2(String[] args) throws Exception {
         URL url = new URL("http://localhost/bugzilla-4.2.1/xmlrpc.cgi");
         TestopiaXmlRpcClient client = new TestopiaXmlRpcClient(url);
@@ -65,14 +86,22 @@ public class T {
         XmlRpcMiscService misc = new XmlRpcMiscService(client);
         misc.login("testuser@example.com", "testuser");
         XmlRpcTestRunService svc = new XmlRpcTestRunService(client);
+        XmlRpcTestCaseRunService svc2 = new XmlRpcTestCaseRunService(client);
         
-        Object o = null;
         try {
-            o = svc.getTestCases(2);
+            TestRun run = svc.getTestRun(2);
+            TestCase[] tcs = svc.getTestCases(2);
+            TestCase tc = tcs[0];
+            tc.setStatusId(Status.PASSED.getValue());
+            TestCaseRun updated = svc2.update(
+                      tc, 
+                      run.getId(), 
+                      Integer.parseInt(run.getBuild()), 
+                      Integer.parseInt(run.getEnvironment()));
+            System.out.println(updated.getPriorityId());
         } catch (Throwable e) {
             e.printStackTrace();
         }
-        System.out.println("Value: " + o);
     }
     
 }
