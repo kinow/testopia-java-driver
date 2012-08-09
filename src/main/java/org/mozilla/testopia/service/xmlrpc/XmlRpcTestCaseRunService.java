@@ -59,7 +59,9 @@ public class XmlRpcTestCaseRunService implements TestCaseRunService {
         map.put("run_id", runId);
         map.put("case_id", tc.getId());
         map.put("build", buildId);
+        map.put("build_id", buildId);
         map.put("environment", envId);
+        map.put("env_id", envId);
         
         map.put("status", tc.getStatusId());
         

@@ -59,18 +59,20 @@ public enum Status {
     public static Status get(int value) {
         switch(value) {
             case 1: 
-                return PASSED;
+                return IDLE;
             case 2: 
-                return FAILED;
+                return PASSED;
             case 3: 
-                return RUNNING;
+                return FAILED;
             case 4: 
-                return PAUSED;
+                return RUNNING;
             case 5: 
-                return BLOCKED;
+                return PAUSED;
             case 6: 
+                return BLOCKED;
+            case 7: 
                 return ERROR;
-            default: 
+            default:
                 return IDLE;
         }
     }

@@ -87,18 +87,20 @@ public class T {
         misc.login("testuser@example.com", "testuser");
         XmlRpcTestRunService svc = new XmlRpcTestRunService(client);
         XmlRpcTestCaseRunService svc2 = new XmlRpcTestCaseRunService(client);
-        
+
         try {
             TestRun run = svc.getTestRun(2);
             TestCase[] tcs = svc.getTestCases(2);
-            TestCase tc = tcs[0];
-            tc.setStatusId(Status.PASSED.getValue());
-            TestCaseRun updated = svc2.update(
-                      tc, 
-                      run.getId(), 
-                      Integer.parseInt(run.getBuild()), 
-                      Integer.parseInt(run.getEnvironment()));
-            System.out.println(updated.getPriorityId());
+            for(TestCase tc : tcs) {
+                System.out.println("Updating TC " + tc.getId() + " with status FAILED");
+                tc.setStatusId(Status.BLOCKED.getValue());
+                TestCaseRun updated = svc2.update(
+                          tc, 
+                          run.getId(), 
+                          Integer.parseInt(run.getBuild()), 
+                          Integer.parseInt(run.getEnvironment()));
+                System.out.println(updated.getPriorityId());
+            }
         } catch (Throwable e) {
             e.printStackTrace();
         }
